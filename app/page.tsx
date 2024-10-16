@@ -1,101 +1,183 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useLayoutEffect, useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { Dancing_Script } from "next/font/google";
+import { animateText } from "@/utils/animation";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import React from "react";
+import Lenis from "lenis";
+import Footer from "./components/Footer";
+import Contact from "./components/Contact";
+import Skills from "./components/Skills";
+const dancingScript = Dancing_Script({ weight: "400", subsets: ["latin"] });
+
+const Home = () => {
+
+  useLayoutEffect(() => {
+    const lenis = new Lenis();
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+  })
+
+
+  const overlayDiv = useRef<HTMLDivElement>(null);
+  const overlayDiv2 = useRef<HTMLDivElement>(null);
+  const [introFinished, setIntroFinished] = React.useState(false);
+
+  useGSAP(() => {
+    animateText();
+    const t1 = gsap.timeline({
+      onComplete: () => {
+        setIntroFinished(true)
+      }
+    });
+    t1.set("#title", { opacity: 1 })
+      .set("#logo > svg", { opacity: 1 })
+      .set("#subtitle", { opacity: 1 })
+      .set("#name", { opacity: 1 })
+      .set("#desc", { opacity: 1 })
+    t1.from("#title > span", {
+      x: "150px",
+      ease: "Power3.easeInOut",
+      duration: 0.8,
+    })
+      .from("#subtitle > span", {
+        x: "150px",
+        ease: "Power3.easeInOut",
+        delay: -0.7,
+      })
+      .from("#name > span", {
+        stagger: 0.02,
+        y: "100%",
+        delay: -0.4,
+      })
+      .from("#logo", {
+        opacity: 0,
+        scale: 0.1,
+        rotate: 360,
+        x: "-100%",
+        delay: -0.3,
+      })
+      .from("#desc > span", {
+        y: "-120%",
+        delay: -0.2,
+      })
+      .to(".child > span", {
+        y: "-120%",
+        duration: 1,
+        delay: 1,
+      })
+      .to(overlayDiv.current, {
+        height: 0,
+        duration: 1.5,
+        delay: -0.4,
+        ease: "Power3.easeInOut",
+      })
+      .to("#logo", {
+        rotate: 360,
+        scale: 25,
+        duration: 2,
+        delay: -2,
+      })
+      .to(overlayDiv2.current, {
+        height: 0,
+        duration: 1.5,
+        delay: -1.2,
+        ease: "Power3.easeInOut",
+      });
+  }, [overlayDiv]);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+    <>
+      <main className="h-screen w-full relative px-8 grid gap-16" id="mainWrapper">
+        {introFinished &&
+          <>
+            <Navbar />
+            <Hero />
+            <Skills />
+            <Contact />
+            <Footer />
+          </>
+        }
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+      <div
+        className="bg-white w-full h-screen absolute top-0 left-0 z-10 text-black overflow-hidden"
+        ref={overlayDiv}
+      >
+        <div className="flex items-center flex-col justify-center text-xl font-light w-full h-[100px] overflow-hidden">
+          <h4 id="title" className="animation-text child overflow-hidden opacity-0">
+            My Portfolio
+          </h4>
+          <p id="subtitle" className="animation-text child overflow-hidden opacity-0">
+            @2024
+          </p>
+        </div>
+        <div className="w-full h-[calc(100vh-100px)] flex justify-center items-center overflow-hidden">
+          <h1
+            id="name"
+            className="text-6xl font-[500] uppercase tracking-tight animation-text child overflow-hidden opacity-0"
+          >
+            Bhavy &nbsp; Jogani
+          </h1>
+          <div
+            id="logo"
+            className="flex justify-center items-center m-4"
+          >
+            <svg
+              width="85"
+              height="85"
+              className="opacity-0"
+              viewBox="0 0 200 200"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clipPath="url(#clip0_116_153)">
+                <path
+                  d="M100 0C103.395 53.7596 146.24 96.6052 200 100C146.24 103.395 103.395 146.24 100 200C96.6052 146.24 53.7596 103.395 0 100C53.7596 96.6052 96.6052 53.7596 100 0Z"
+                  fill="url(#paint0_linear_116_153)"
+                />
+              </g>
+              <defs>
+                <linearGradient
+                  id="paint0_linear_116_153"
+                  x1="100"
+                  y1="0"
+                  x2="100"
+                  y2="200"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stopColor="#DF99F7" />
+                  <stop offset="1" stopColor="#FFDBB0" />
+                </linearGradient>
+                <clipPath id="clip0_116_153">
+                  <rect width="200" height="200" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <h4
+            id="desc"
+            className="text-5xl font-[300] italic animation-text child overflow-hidden opacity-0"
+            style={{ fontFamily: dancingScript.style.fontFamily }}
+          >
+            Creative &nbsp; web &nbsp; developer
+          </h4>
+        </div>
+      </div>
+      <div
+        className="bg-[#D2FF72] w-full h-screen absolute top-0 left-0 z-05"
+        ref={overlayDiv2}
+      ></div>
+    </>
   );
-}
+};
+
+export default Home;
+
