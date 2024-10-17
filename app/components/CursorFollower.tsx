@@ -1,7 +1,8 @@
 "use client";
 // CursorFollower.tsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { useCursor } from '../context/cursorContext';
+import Lenis from 'lenis';
 
 interface Position {
     x: number;
@@ -9,8 +10,18 @@ interface Position {
 }
 
 export default function CursorFollower(): JSX.Element {
+
     const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
     const { cursorStyle } = useCursor();
+
+    useLayoutEffect(() => {
+        const lenis = new Lenis();
+        function raf(time: number) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+    });
 
     useEffect(() => {
         const updateMousePosition = (e: MouseEvent) => {

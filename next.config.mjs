@@ -10,7 +10,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "fffuel.co",
+        hostname: "www.fffuel.co",
         port: "",
         pathname: "/**",
       },

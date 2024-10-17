@@ -3,7 +3,7 @@ import Projects from '../components/Projects'
 
 const Work = () => {
     return (
-        <div><Projects /></div>
+        <div className='min-h-screen'><Projects /></div>
     )
 }
 

@@ -5,7 +5,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import React from 'react'
 import { useCursor } from '../context/cursorContext';
-import Link from 'next/link';
+import FlipLink from './FlipLinks';
 
 const Navbar = () => {
     const { updateCursorStyle, resetCursorStyle } = useCursor();
@@ -29,15 +29,13 @@ const Navbar = () => {
     })
 
     return (
-        <nav className='h-[80px] w-full flex justify-between items-center container mx-auto z-[9999]' id='nav'>
-            <h2 className='uppercase text-xl md:text-3xl text-red-200 font-extrabold animation-text nav-text overflow-hidden'>Bhavy&nbsp;J.</h2>
-            <div>
-                <ul className='flex gap-8 text-xl overflow-hidden' id='nav-links'>
-                    <li className='hover:text-red-200 transition-colors duration-500' onMouseEnter={() => updateCursorStyle({ size: 75 })} onMouseLeave={() => resetCursorStyle()}><Link href="">Home</Link></li>
-                    <li className='hover:text-red-200 transition-colors duration-500' onMouseEnter={() => updateCursorStyle({ size: 75 })} onMouseLeave={() => resetCursorStyle()}><Link href="work">Work</Link></li>
-                    <li className='hover:text-red-200 transition-colors duration-500' onMouseEnter={() => updateCursorStyle({ size: 75 })} onMouseLeave={() => resetCursorStyle()}><Link href="">About</Link></li>
-                </ul>
-            </div>
+        <nav className='h-[80px] w-full flex justify-between items-center container mx-auto z-[999]' id='nav'>
+            <h2 className='uppercase text-2xl md:text-4xl font-extrabold animation-text nav-text overflow-hidden'>Bhavy&nbsp;J.</h2>
+            <ul className='flex gap-6' id='nav-links'>
+                <li onMouseEnter={() => updateCursorStyle({ size: 75 })} onMouseLeave={() => resetCursorStyle()}><FlipLink href="/">Home</FlipLink></li>
+                <li onMouseEnter={() => updateCursorStyle({ size: 75 })} onMouseLeave={() => resetCursorStyle()}><FlipLink href="work">Work</FlipLink></li>
+                <li onMouseEnter={() => updateCursorStyle({ size: 75 })} onMouseLeave={() => resetCursorStyle()}><FlipLink href="">About</FlipLink></li>
+            </ul>
         </nav>
     )
 }
