@@ -12,7 +12,7 @@ import { AnimatePresence } from "framer-motion";
 const Home = () => {
 
   
-  const [introFinished, setIntroFinished] = React.useState(false);
+  const [introFinished, setIntroFinished] = React.useState(true);
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setIntroFinished(true);

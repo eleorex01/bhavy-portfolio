@@ -3,10 +3,7 @@ import "./globals.css";
 import { Oswald } from "next/font/google";
 import { CursorProvider } from "./context/cursorContext";
 import CursorFollower from "./components/CursorFollower";
-// import MouseEffect from "./components/MouseEffect";
 const oswald = Oswald({ weight: "400", subsets: ["latin"] });
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
 
 
 export const metadata: Metadata = {
@@ -29,9 +26,9 @@ export default function RootLayout({
         <main className="w-full relative px-8 grid gap-16" id="mainWrapper">
           <CursorProvider>
             <CursorFollower />
-            <Navbar />
+            {/* <Navbar /> */}
             {children}
-            <Footer />
+            {/* <Footer /> */}
           </CursorProvider>
         </main>
       </body>

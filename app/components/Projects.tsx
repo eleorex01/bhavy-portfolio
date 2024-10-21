@@ -172,7 +172,7 @@ function AboutProject() {
     const isInView = useInView(description)
     return (
         <div ref={description} className={aboutStyle.description}>
-            <div className={aboutStyle.body}>
+            <div className={`${aboutStyle.body} flex-col xl:flex-row`}>
                 <p>
                     {
                         phrase.split(" ").map((word, index) => {
