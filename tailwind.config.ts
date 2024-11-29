@@ -85,7 +85,10 @@ const config: Config = {
   		animation: {
   			marquee: 'marquee var(--duration) infinite linear',
   			'marquee-vertical': 'marquee-vertical var(--duration) linear infinite'
-  		}
+  		},
+		transitionTimingFunction: {
+			'out-expo': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+		},
   	}
   },
   plugins: [require("tailwindcss-animate")],

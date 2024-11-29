@@ -182,7 +182,7 @@ function AboutProject() {
                 </p>
                 <motion.p variants={opacity} animate={isInView ? "open" : "closed"}>My passion for design, coding, and creating interactive experiences positions me uniquely in the world of web development.</motion.p>
                 <div>
-                    <motion.button className='py-6 px-8 bg-white text-black rounded-full text-2xl'><FlipLink href="#">About&nbsp;Me</FlipLink>
+                    <motion.button className='py-6 px-8 bg-white text-black rounded-full text-2xl'><FlipLink href="/about">About&nbsp;Me</FlipLink>
                     </motion.button>
                 </div>
             </div>
