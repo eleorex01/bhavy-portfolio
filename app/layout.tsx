@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Oswald } from "next/font/google";
-import { CursorProvider } from "./context/cursorContext";
-import CursorFollower from "./components/CursorFollower";
 const oswald = Oswald({ weight: "400", subsets: ["latin"] });
 
 
@@ -24,12 +22,7 @@ export default function RootLayout({
         style={{ fontFamily: oswald.style.fontFamily }}
       >
         <main className="w-full relative px-8 grid gap-16" id="mainWrapper">
-          <CursorProvider>
-            <CursorFollower />
-            {/* <Navbar /> */}
             {children}
-            {/* <Footer /> */}
-          </CursorProvider>
         </main>
       </body>
     </html>

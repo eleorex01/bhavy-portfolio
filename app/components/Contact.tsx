@@ -1,13 +1,13 @@
 "use client";
 
 import React from 'react'
-import { useCursor } from '../context/cursorContext';
+// import { useCursor } from '../context/cursorContext';
 import { useGSAP } from '@gsap/react';
 import { animateText } from '@/utils/animation';
 import gsap from 'gsap';
 
 const Contact = () => {
-    const { updateCursorStyle, resetCursorStyle } = useCursor();
+    // const { updateCursorStyle, resetCursorStyle } = useCursor();
 
     useGSAP(() => {
         animateText();
@@ -46,16 +46,16 @@ const Contact = () => {
         <div className='container mx-auto w-auto h-auto border border-slate-700 p-[10rem] rounded-[50px] grid gap-16' id='contact'>
             <div className='grid gap-6 justify-items-center relative'>
                 <h3 className='text-xl md:text-2xl lg:text-3xl xl:text-4xl'>Don&apos;t Be Shy, Say Hi!</h3>
-                <h2 onMouseEnter={() => updateCursorStyle({ size: 180 })} onMouseLeave={resetCursorStyle} className='text-2xl md:text-3xl lg:text-5xl xl:text-7xl hover:text-red-400 transition-colors duration-500 overflow-y-hidden h-[50px] lg:h-[80px] xl:h-[110px]' ><a href="mailto:bhavyjogani123@gmail.com" className='animation-text' id='email'>bhavyjogani123@gmail.com</a></h2>
+                <h2 className='text-2xl md:text-3xl lg:text-5xl xl:text-7xl hover:text-red-400 transition-colors duration-500 overflow-y-hidden h-[50px] lg:h-[80px] xl:h-[110px]' ><a href="mailto:bhavyjogani123@gmail.com" className='animation-text' id='email'>bhavyjogani123@gmail.com</a></h2>
             </div>
             <div className='flex gap-8 justify-center items-center w-full'>
                 <div className='flex gap-4 items-center'>
                     <span className='w-3 h-3 rounded-full bg-red-400'></span>
-                    <a onMouseEnter={() => updateCursorStyle({ size: 75 })} onMouseLeave={() => resetCursorStyle()} className='text-xl hover:text-red-400 transition-colors duration-500 leading-none' href="https://www.linkedin.com/in/bhavy-jogani" target='_blank'>LinkedIn</a>
+                    <a className='text-xl hover:text-red-400 transition-colors duration-500 leading-none' href="https://www.linkedin.com/in/bhavy-jogani" target='_blank'>LinkedIn</a>
                 </div>
                 <div className='flex gap-4 items-center'>
                     <span className='w-3 h-3 rounded-full bg-red-400'></span>
-                    <a onMouseEnter={() => updateCursorStyle({ size: 75 })} onMouseLeave={() => resetCursorStyle()} className='text-xl hover:text-red-400 transition-colors duration-500' href="https://drive.google.com/file/d/1wfqbBZchjtWoD3--aUEdddmZZ9MjlaFS/view?usp=sharing" target='_blank'>Download CV</a>
+                    <a className='text-xl hover:text-red-400 transition-colors duration-500' href="https://drive.google.com/file/d/1wfqbBZchjtWoD3--aUEdddmZZ9MjlaFS/view?usp=sharing" target='_blank'>Download CV</a>
                 </div>
             </div>
 

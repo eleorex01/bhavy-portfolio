@@ -1,9 +1,10 @@
 "use client";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Lenis from "lenis";
 
 export default function RootLayout({
     children,
@@ -19,7 +20,14 @@ export default function RootLayout({
             onComplete: () => setIsAnimating(false)
         })
     },{ scope: "#animWrapper" })
-
+    useLayoutEffect(() => {
+        const lenis = new Lenis();
+        function raf(time: number) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+    });
     return (
         <>
             {isAnimating && <div className="absolute h-screen w-full flex" id="animWrapper">
@@ -32,7 +40,7 @@ export default function RootLayout({
             {!isAnimating &&
                 <>
                     <Navbar /> 
-                    {children}
+                        {children}
                     <Footer />
                 </>
             }
